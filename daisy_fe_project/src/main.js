@@ -45,16 +45,20 @@ const router = createRouter({
 
 
 router.beforeEach((to, from, next) => {
-    const accessToken = localStorage.getItem('token');
-    if (to.matched.some(record => record.meta.requiresAuth)) {
-        if (!accessToken) {
-            next('/LogIn'); 
-        } else {
-            next(); 
-        }
-    } else {
-        next(); 
-    }
+  const accessToken = localStorage.getItem('token');
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+      if (!accessToken) {
+          next('/LogIn'); 
+      } else {
+          next(); 
+      }
+  } else {
+      if (accessToken && (to.name === 'LogIn' || to.name === 'SignUp')) {
+          next('/HomePage'); 
+      } else {
+          next(); 
+      }
+  }
 });
 
 createApp(App).use(router).mount('#app');
