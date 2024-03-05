@@ -4,6 +4,8 @@ import { createRouter, createWebHistory } from 'vue-router';
 import SignUp from './views/SignUp.vue';
 import LogIn from './views/LogIn.vue';
 import HomePage from './views/HomePage.vue';
+import AddInvoice from './views/AddInvoice.vue';
+
 const routes = [
     {
       path: '/',
@@ -19,6 +21,11 @@ const routes = [
       path: '/HomePage',
       name: 'HomePage',
       component: HomePage,
+    },
+    {
+      path: '/AddInvoice',
+      name: 'AddInvoice',
+      component: AddInvoice,
     }
 ]
 

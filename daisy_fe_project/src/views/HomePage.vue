@@ -1,9 +1,20 @@
 <template>
-<h1>Hello User</h1>
+<button @click="goToAddPage">Add Invoice</button>
 </template>
 
 <script>
  export default{
-    name:'HomePage'
+    name:'HomePage',
+    data(){
+        return{
+            invoices:[],
+            token:''
+        }
+    },
+    methods : {
+       goToAddPage() {
+         this.$router.push({ name: "AddInvoice" });
+       }
+    }
  }
 </script>
