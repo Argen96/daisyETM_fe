@@ -6,15 +6,6 @@
         <i class="fas fa-plus"></i> Add Invoice
       </button>
       <table class="invoice-table">
-        <thead>
-          <tr>
-            <th>Invoice Number</th>
-            <th>Total Value</th>
-            <th>Client Name</th>
-            <th>Date Added</th>
-            <th>Action</th>
-          </tr>
-        </thead>
         <tbody>
           <tr v-for="invoice in invoices" :key="invoice._id">
             <td>{{ invoice.invoice_number }}</td>
@@ -25,7 +16,7 @@
               <button @click="editInvoice(invoice._id)" class="edit-btn">
                 <i class="fas fa-edit"></i> Edit
               </button>
-              <button @click="deleteInvoice(invoice._id)" class="delete-btn">
+              <button @click="showDeleteModal(invoice._id)" class="delete-btn">
                 <i class="fas fa-trash-alt"></i> Delete
               </button>
             </td>
@@ -34,6 +25,16 @@
       </table>
     </div>
     <Footer />
+    
+    <div class="modal" v-if="showModal">
+      <div class="modal-content">
+        <p>Are you sure you want to delete this invoice?</p>
+        <div>
+          <button @click="deleteInvoiceConfirmed" class="confirm-btn">Yes</button>
+          <button @click="hideModal" class="cancel-btn">No</button>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -51,8 +52,9 @@ export default {
   data() {
     return {
       invoices: [],
-      token: '',
-      error: null
+      error: null,
+      showModal: false,
+      invoiceToDelete: null
     };
   },
   async mounted() {
@@ -67,7 +69,7 @@ export default {
         const accessToken = localStorage.getItem('token');
         const response = await axios.get('http://localhost:80/api/invoices', {
           headers: {
-            Authorization: `Bearer ${accessToken}`,
+            authorization: `Bearer ${accessToken}`,
           },
         });
         if (response.statusText === 'OK') {
@@ -80,26 +82,58 @@ export default {
     async deleteInvoice(invoiceId) {
       try {
         const accessToken = localStorage.getItem('token');
-        const response = await axios.delete(`http://localhost:80/api/invoice/${invoiceId}`, {
+         await axios.delete(`http://localhost:80/api/invoice/${invoiceId}`, {
           headers: {
             authorization: `Bearer ${accessToken}`,
           },
         });
-        console.log(response);
         await this.fetchInvoices();
       } catch (error) {
         console.error(error);
       }
     },
-     editInvoice(invoiceId) {
-       localStorage.setItem('invoiceId', invoiceId);
-       this.$router.push({ name: "EditInvoice" });
-     }
+    editInvoice(invoiceId) {
+      localStorage.setItem('invoiceId', invoiceId);
+      this.$router.push({ name: "EditInvoice" });
+    },
+    showDeleteModal(invoiceId) {
+      this.invoiceToDelete = invoiceId;
+      this.showModal = true;
+    },
+    hideModal() {
+      this.showModal = false;
+      this.invoiceToDelete = null;
+    },
+    async deleteInvoiceConfirmed() {
+      if (this.invoiceToDelete) {
+        await this.deleteInvoice(this.invoiceToDelete);
+        this.hideModal();
+      }
+    }
   }
 };
 </script>
 
 <style scoped>
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+
 .home-page {
   max-width: 800px;
   margin: 0 auto;
