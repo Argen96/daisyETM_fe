@@ -22,22 +22,39 @@ const routes = [
       path: '/HomePage',
       name: 'HomePage',
       component: HomePage,
+      meta: { requiresAuth: true } 
     },
     {
       path: '/AddInvoice',
       name: 'AddInvoice',
       component: AddInvoice,
+      meta: { requiresAuth: true } 
     },
     {
       path: '/EditInvoice',
       name: 'EditInvoice',
       component: EditInvoice,
+      meta: { requiresAuth: true } 
     }
 ]
 
 const router = createRouter({
     history: createWebHistory(process.env.BASE_URL),
     routes,
-  });
-  
-  createApp(App).use(router).mount('#app'); 
+});
+
+
+router.beforeEach((to, from, next) => {
+    const accessToken = localStorage.getItem('token');
+    if (to.matched.some(record => record.meta.requiresAuth)) {
+        if (!accessToken) {
+            next('/LogIn'); 
+        } else {
+            next(); 
+        }
+    } else {
+        next(); 
+    }
+});
+
+createApp(App).use(router).mount('#app');

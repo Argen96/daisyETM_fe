@@ -38,6 +38,9 @@
           </div>
         </form>
         <p class="error">{{ error }}</p>
+        <div class="navigation-links">
+          <router-link to="/login">Already have an account? Log in</router-link>
+        </div>
       </div>
     </div>
     <FooterBar/>

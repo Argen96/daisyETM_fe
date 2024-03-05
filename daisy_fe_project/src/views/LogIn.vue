@@ -18,6 +18,7 @@
           </div>
         </form>
         <p class="error">{{ error }}</p>
+        <p>Don't have an account? <router-link to="/">Sign Up</router-link></p>
       </div>
     </div>
     <FooterBar />
