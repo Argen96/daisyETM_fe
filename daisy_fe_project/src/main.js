@@ -5,6 +5,7 @@ import SignUp from './views/SignUp.vue';
 import LogIn from './views/LogIn.vue';
 import HomePage from './views/HomePage.vue';
 import AddInvoice from './views/AddInvoice.vue';
+import EditInvoice from './views/EditInvoice.vue';
 
 const routes = [
     {
@@ -26,6 +27,11 @@ const routes = [
       path: '/AddInvoice',
       name: 'AddInvoice',
       component: AddInvoice,
+    },
+    {
+      path: '/EditInvoice',
+      name: 'EditInvoice',
+      component: EditInvoice,
     }
 ]
 

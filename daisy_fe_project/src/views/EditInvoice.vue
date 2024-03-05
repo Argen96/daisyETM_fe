@@ -2,7 +2,7 @@
 <div>
 <PrivateNavBar />
   <div class="create-invoice-form">
-    <h2>Create Invoice</h2>
+    <h2>Edit Invoice</h2>
     <form @submit.prevent="addInvoice">
       <div class="form-group">
         <label for="invoice_number">Invoice Number:</label>
@@ -32,7 +32,7 @@ import PrivateNavBar from '../components/PrivateNavBar.vue'
 import Footer from '../components/Footer.vue'
 
 export default {
-  name: 'AddInvoice',
+  name: 'EditInvoice',
   components:{
   PrivateNavBar,
   Footer
@@ -49,19 +49,20 @@ export default {
     async addInvoice() {
       try {
         const accessToken = localStorage.getItem("token");
+        const invoiceId = localStorage.getItem("invoiceId");
         const newInvoice = {
           invoice_number: this.invoice_number,
           total_value: this.total_value,
           client_name: this.client_name
         }
-        const response = await axios.post('http://localhost:80/api/add-invoice', newInvoice, {
+        const response = await axios.put(`http://localhost:80/api/invoice/${invoiceId}`, newInvoice, {
           headers: {
             authorization: `Bearer ${accessToken}`,
           }
         })
         if (response.statusText === 'OK') {
           this.error = null;
-          alert("Invoice updated successfully!");
+          alert("Invoice created successfully!");
         }
       } catch (error) {
         this.error = `Invoice creation failed. ${error.response.data.message}.`;
