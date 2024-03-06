@@ -6,10 +6,19 @@
         <i class="fas fa-plus"></i> Add Invoice
       </button>
       <table class="invoice-table">
+         <thead>
+          <tr>
+            <th>Invoice Number</th>
+            <th>Total Value</th>
+            <th>Client Name</th>
+            <th>Date Added</th>
+            <th>Action</th>
+          </tr>
+        </thead>
         <tbody>
           <tr v-for="invoice in invoices" :key="invoice._id">
             <td>{{ invoice.invoice_number }}</td>
-            <td>{{ invoice.total_value }}</td>
+            <td>{{ invoice.total_value }}$</td>
             <td>{{ invoice.client_name }}</td>
             <td>{{ invoice.date_added }}</td>
             <td>
@@ -23,6 +32,7 @@
           </tr>
         </tbody>
       </table>
+      <div class="total-values">Total Values: {{totalValues}}$</div>
     </div>
     <Footer />
     
@@ -54,7 +64,8 @@ export default {
       invoices: [],
       error: null,
       showModal: false,
-      invoiceToDelete: null
+      invoiceToDelete: null,
+      totalValues : ''
     };
   },
   async mounted() {
@@ -73,7 +84,9 @@ export default {
           },
         });
         if (response.statusText === 'OK') {
-          this.invoices = response.data;
+          this.invoices = response.data.invoices;
+          this.totalValues = response.data.totalValues
+          console.log(this.totalValues)
         }
       } catch (error) {
         this.error = error.message;
@@ -179,5 +192,14 @@ export default {
 .edit-btn i,
 .delete-btn i {
   margin-right: 5px;
+}
+.total-values {
+  margin-top: 20px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+  border: 2px solid #ccc;
+  padding: 10px;
+  background-color: #f9f9f9;
 }
 </style>
