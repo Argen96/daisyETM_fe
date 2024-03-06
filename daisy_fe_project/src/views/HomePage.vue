@@ -18,7 +18,7 @@
         <tbody>
           <tr v-for="invoice in invoices" :key="invoice._id">
             <td>{{ invoice.invoice_number }}</td>
-            <td>{{ invoice.total_value }}$</td>
+            <td>{{ invoice.total_value }} $</td>
             <td>{{ invoice.client_name }}</td>
             <td>{{ invoice.date_added }}</td>
             <td>
@@ -32,7 +32,7 @@
           </tr>
         </tbody>
       </table>
-      <div class="total-values">Total Values: {{totalValues}}$</div>
+      <div class="total-values">Total Values: {{totalValues}} $</div>
     </div>
     <Footer />
     
@@ -128,26 +128,6 @@ export default {
 </script>
 
 <style scoped>
-.modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.modal-content {
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-  margin-left: 4em;
-}
-
 .home-page {
   max-width: 800px;
   margin: 0 auto;
@@ -208,5 +188,47 @@ background: rgb(49, 203, 49);
 }
 .delete-btn{
   background: rgb(210, 29, 29);
+}
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.confirm-btn,
+.cancel-btn {
+  padding: 10px 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 3.5em;
+}
+
+.confirm-btn {
+  background-color: green;
+  color: #fff;
+}
+
+.cancel-btn {
+  background-color: red;
+  color: #fff;
 }
 </style>

@@ -6,19 +6,19 @@
         <h2 class="signUp_h2">Sign Up</h2>
         <form @submit.prevent="signUp">
           <div class="form-group">
-            <label for="first_name">First Name:</label>
+            <label for="first_name">*First Name:</label>
             <input v-model="first_name" id="first_name" placeholder="First Name" type="text" required>
           </div>
           <div class="form-group">
-            <label for="last_name">Last Name:</label>
+            <label for="last_name">*Last Name:</label>
             <input v-model="last_name" id="last_name" placeholder="Last Name" type="text" required>
           </div>
           <div class="form-group">
-            <label for="email">Email:</label>
+            <label for="email">*Email:</label>
             <input v-model="email" id="email" placeholder="Email" type="email" required>
           </div>
           <div class="form-group">
-            <label for="password">Password:</label>
+            <label for="password">*Password:</label>
             <input v-model="password" id="password" placeholder="Password" type="password" required>
           </div>
           <div class="form-group">
