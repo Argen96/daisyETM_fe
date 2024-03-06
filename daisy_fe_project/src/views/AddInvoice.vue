@@ -82,6 +82,7 @@ export default {
 label {
   display: block;
   font-weight: bold;
+  color:rgb(26, 110, 158)
 }
 input[type="text"],
 input[type="number"],

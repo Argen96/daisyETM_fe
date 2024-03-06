@@ -3,7 +3,7 @@
     <PublicNavBar />
     <div class="content">
       <div class="login-form">
-        <h2>Log In</h2>
+        <h2 class="logIn_h2">Log In</h2>
         <form @submit.prevent="logIn">
           <div class="form-group">
             <label for="email">Email:</label>
@@ -17,8 +17,10 @@
             <button type="submit">Submit</button>
           </div>
         </form>
-        <p class="error">{{ error }}</p>
+         <div class="navigation-links">
         <p>Don't have an account? <router-link to="/">Sign Up</router-link></p>
+        </div>
+        <p class="error">{{ error }}</p>
       </div>
     </div>
     <FooterBar />
@@ -65,6 +67,13 @@ export default {
 </script>
 
 <style scoped>
+
+ .logIn_h2{
+  text-align: center;
+  color:#0056b3;
+  text-decoration: #007bff;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+ }
 .login-form {
   max-width: 400px;
   margin: 0 auto;
@@ -75,6 +84,7 @@ export default {
 label {
   display: block;
   font-weight: bold;
+  color:rgb(26, 110, 158)
 }
 input[type="email"],
 input[type="password"],
@@ -95,6 +105,7 @@ button:hover {
 }
 .error {
   color: red;
+  text-align: center;
 }
 
 html, body {
@@ -122,4 +133,9 @@ footer {
   bottom: 0;
   width: 100%;
 }
+  .navigation-links {
+    margin-top: 1rem;
+    text-align: center;
+    width: 100%;
+  }
 </style>

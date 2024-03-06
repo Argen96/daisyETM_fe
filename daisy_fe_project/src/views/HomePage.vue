@@ -145,6 +145,7 @@ export default {
   padding: 20px;
   border-radius: 5px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  margin-left: 4em;
 }
 
 .home-page {
@@ -163,7 +164,8 @@ export default {
 .invoice-table td {
   border: 1px solid #ddd;
   padding: 8px;
-  text-align: left;
+  text-align: center;
+ font-family: Arial, Helvetica, sans-serif;
 }
 
 .invoice-table th {
@@ -182,16 +184,14 @@ export default {
   margin-right: 5px;
 }
 
-.add-invoice-btn:hover,
-.edit-btn:hover,
-.delete-btn:hover {
-  background-color: #0056b3;
-}
-
 .add-invoice-btn i,
 .edit-btn i,
 .delete-btn i {
   margin-right: 5px;
+}
+.add-invoice-btn{
+margin-left: 24em;
+background: rgb(49, 203, 49);
 }
 .total-values {
   margin-top: 20px;
@@ -201,5 +201,12 @@ export default {
   border: 2px solid #ccc;
   padding: 10px;
   background-color: #f9f9f9;
+  text-align: center;
+}
+.edit-btn{
+  background: rgb(203, 138, 17);
+}
+.delete-btn{
+  background: rgb(210, 29, 29);
 }
 </style>
